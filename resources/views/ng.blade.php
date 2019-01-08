@@ -44,16 +44,17 @@
             <nav class="navbar navbar-static-top" role="navigation">
                 <div class="navbar-toolbar">
                     <ul class="nav navbar-nav">
-                        <li><a class="toolbar" title="{{'New' | translate}}" ng-href="#!/new"><i class="fa fa-plus"></i>
+                        
+                        <li><a class="toolbar" title="{\{'New' | translate}}" ng-href="#!/new"><i class="fa fa-plus"></i>
                                 <span translate>New</span></a></li>
                         <li class="divider"></li>
                         <li class="disabled" ng-class="{'disabled': !isSpecifiedTaskSelected('paused')}"><a class="toolbar"
-                                title="{{'Start' | translate}}" ng-click="changeTasksState('start')"><i class="fa fa-play"></i></a></li>
+                                title="{\{'Start' | translate}}" ng-click="changeTasksState('start')"><i class="fa fa-play"></i></a></li>
                         <li class="disabled" ng-class="{'disabled': !isSpecifiedTaskSelected('active', 'waiting')}"><a
-                                class="toolbar" title="{{'Pause' | translate}}" ng-click="changeTasksState('pause')"><i
+                                class="toolbar" title="{\{'Pause' | translate}}" ng-click="changeTasksState('pause')"><i
                                     class="fa fa-pause"></i></a></li>
                         <li class="disabled" ng-class="{'disabled': !isTaskSelected() && !isSpecifiedTaskShowing('complete', 'error', 'removed')}"><a
-                                class="toolbar dropdown-toggle" data-toggle="dropdown" title="{{'Delete' | translate}}"><i
+                                class="toolbar dropdown-toggle" data-toggle="dropdown" title="{\{'Delete' | translate}}"><i
                                     class="fa fa-trash-o"></i> <i class="fa fa-caret-right fa-right-bottom fa-rotate-45 fa-half"
                                     aria-hidden="true"></i></a>
                             <ul class="dropdown-menu" role="menu">
@@ -66,10 +67,10 @@
                         </li>
                         <li class="divider"></li>
                         <li class="disabled" ng-class="{'disabled': !taskContext.enableSelectAll || !taskContext.list || taskContext.list.length < 1}"><a
-                                class="toolbar" title="{{'Select All' | translate}}" ng-click="selectAllTasks()"><i
+                                class="toolbar" title="{\{'Select All' | translate}}" ng-click="selectAllTasks()"><i
                                     class="fa fa-th-large"></i></a></li>
                         <li class="disabled" ng-class="{'disabled': !taskContext.enableSelectAll || !taskContext.list || taskContext.list.length < 1}"><a
-                                class="toolbar dropdown-toggle" data-toggle="dropdown" title="{{'Display Order' | translate}}"><i
+                                class="toolbar dropdown-toggle" data-toggle="dropdown" title="{\{'Display Order' | translate}}"><i
                                     class="fa fa-sort-alpha-asc"></i> <i class="fa fa-caret-right fa-right-bottom fa-rotate-45 fa-half"
                                     aria-hidden="true"></i></a>
                             <ul class="dropdown-menu" role="menu">
@@ -90,13 +91,13 @@
                             </ul>
                         </li>
                         <li class="divider"></li>
-                        <li><a class="toolbar" title="{{'Help' | translate}}" href="http://github.com/mayswind/AriaNg"
+                        <li><a class="toolbar" title="{\{'Help' | translate}}" href="http://github.com/mayswind/AriaNg"
                                 target="_blank"><i class="fa fa-question-circle-o"></i></a></li>
                     </ul>
                 </div>
                 <div class="navbar-searchbar hidden-xs">
                     <ul class="nav navbar-nav">
-                        <li><input class="form-control" ng-placeholder="('Search' | translate)" title="{{'Search' | translate}}"
+                        <li><input class="form-control" ng-placeholder="('Search' | translate)" title="{\{'Search' | translate}}"
                                 ng-model="searchContext.text">
                             <div class="form-control-icon"><span class="fa fa-search form-control-feedback"></span></div>
                         </li>
@@ -107,6 +108,24 @@
         <aside class="main-sidebar">
             <section class="sidebar">
                 <ul id="siderbar-menu" class="sidebar-menu">
+                    <li class="header" translate>user</li>
+                    <li class="treeview">
+                        <a href="javascript:void(0);">
+                            <i class="fa fa-cogs"></i> <span translate> {{ Auth::user()->name }}</span>
+                            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li data-href-match="/settings/aria2/basic">
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <span translate>logout</span>
+                                </a>
+                                
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="header" translate>Download</li>
                     <li data-href-match="/downloading"><a href="#!/downloading"><i class="fa fa-arrow-circle-o-down"></i>
                             <span ng-bind="('Downloading' | translate) + (globalStat && globalStat.numActive > 0 ? ' (' + globalStat.numActive + ')' : '')">Downloading</span></a></li>
@@ -154,10 +173,10 @@
             <nav class="navbar" role="navigation">
                 <div class="navbar-toolbar">
                     <ul class="nav navbar-nav">
-                        <li><a data-toggle="offcanvas" role="button" title="{{'Toggle Navigation' | translate}}"><i
+                        <li><a data-toggle="offcanvas" role="button" title="{\{'Toggle Navigation' | translate}}"><i
                                     class="fa fa-bars"></i></a></li>
                         <li class="divider"></li>
-                        <li class="dropup"><a class="dropdown-toggle" data-toggle="dropdown" role="button" title="{{'Quick Setting' | translate}}"><i
+                        <li class="dropup"><a class="dropdown-toggle" data-toggle="dropdown" role="button" title="{\{'Quick Setting' | translate}}"><i
                                     class="fa fa-wrench"></i> <span translate>Quick Setting</span> <i class="fa fa-caret-right fa-right-bottom fa-rotate-45 fa-half"
                                     aria-hidden="true"></i></a>
                             <ul class="dropdown-menu" role="menu">
@@ -167,7 +186,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="pull-right ng-cloak" ng-if="globalStatusContext.isEnabled"><a class="global-status" title="{{('Click to pin' | translate)}}"
+                <div class="pull-right ng-cloak" ng-if="globalStatusContext.isEnabled"><a class="global-status" title="{\{('Click to pin' | translate)}}"
                         ng-pop-chart ng-data="globalStatusContext.data" ng-container="body" ng-placement="top"
                         ng-trigger="click hover" ng-popover-class="global-status-chart"><span class="realtime-speed"><i
                                 class="icon-download fa fa-arrow-down"></i> <span ng-bind="(globalStat.downloadSpeed | readableVolume) + '/s'"></span>
